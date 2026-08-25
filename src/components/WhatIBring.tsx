@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import Reveal from "./Reveal";
+import { TableIcon } from "./icons";
 
 type Pill = {
   label: string;
@@ -23,21 +24,34 @@ const pills: Pill[] = [
   { label: "Framer Development", top: "92%", left: "26%", rotate: -2, color: "bg-violet-100 text-violet-900" },
 ];
 
+// Approximate size of the scatter container, used to translate each pill's
+// resting position into a "distance from center" offset for the entrance.
+const FIELD_W = 700;
+const FIELD_H = 480;
+
+function centerOffset(pill: Pill) {
+  const leftPct = parseFloat(pill.left);
+  const topPct = parseFloat(pill.top);
+  return {
+    x: ((50 - leftPct) / 100) * FIELD_W,
+    y: ((50 - topPct) / 100) * FIELD_H,
+  };
+}
+
 export default function WhatIBring() {
   return (
-    <section className="bg-[#F4EFE7] px-6 py-28">
+    <section className="bg-white px-6 py-28">
       <div className="relative mx-auto min-h-[560px] max-w-4xl md:min-h-[520px]">
-        <div className="flex flex-col items-center gap-3 pt-10 text-center md:absolute md:inset-0 md:justify-center md:pt-0">
-          <Reveal className="text-3xl">🛹</Reveal>
+        <div className="relative z-10 flex flex-col items-center gap-3 pt-10 text-center md:absolute md:inset-0 md:justify-center md:pt-0">
+          <Reveal>
+            <TableIcon className="h-8 w-11 text-blue-950" />
+          </Reveal>
           <Reveal delay={0.1}>
-            <h2 className="font-serif text-3xl italic text-blue-950 md:text-4xl">
+            <h2 className="font-mono text-3xl text-blue-950 md:text-4xl">
               What I bring
               <br />
               to the table
             </h2>
-          </Reveal>
-          <Reveal delay={0.2} className="max-w-xs text-sm text-neutral-500">
-            Digital experiences that engage users and help your startup stand out from day one
           </Reveal>
         </div>
 
@@ -45,7 +59,7 @@ export default function WhatIBring() {
           {pills.map((pill) => (
             <span
               key={pill.label}
-              className={`rounded-full px-4 py-1.5 text-xs font-medium ${pill.color}`}
+              className={`rounded-full px-4 py-1.5 font-sans text-xs font-medium ${pill.color}`}
             >
               {pill.label}
             </span>
@@ -53,20 +67,27 @@ export default function WhatIBring() {
         </div>
 
         <div className="hidden md:block">
-          {pills.map((pill, i) => (
-            <motion.span
-              key={pill.label}
-              initial={{ opacity: 0, scale: 0.8 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true, margin: "-80px" }}
-              whileHover={{ scale: 1.08, rotate: 0 }}
-              transition={{ duration: 0.5, delay: i * 0.05, ease: [0.22, 1, 0.36, 1] }}
-              style={{ top: pill.top, left: pill.left, rotate: pill.rotate }}
-              className={`absolute -translate-x-1/2 -translate-y-1/2 whitespace-nowrap rounded-full px-4 py-2 text-sm font-medium shadow-sm ${pill.color}`}
-            >
-              {pill.label}
-            </motion.span>
-          ))}
+          {pills.map((pill, i) => {
+            const offset = centerOffset(pill);
+            return (
+              <div
+                key={pill.label}
+                style={{ top: pill.top, left: pill.left }}
+                className="absolute -translate-x-1/2 -translate-y-1/2"
+              >
+                <motion.span
+                  initial={{ opacity: 0, scale: 0.3, x: offset.x, y: offset.y, rotate: 0 }}
+                  whileInView={{ opacity: 1, scale: 1, x: 0, y: 0, rotate: pill.rotate }}
+                  viewport={{ once: true, margin: "-80px" }}
+                  whileHover={{ scale: 1.08, rotate: 0 }}
+                  transition={{ duration: 0.7, delay: i * 0.06, ease: [0.22, 1, 0.36, 1] }}
+                  className={`inline-block whitespace-nowrap rounded-full px-4 py-2 font-sans text-sm font-medium shadow-sm ${pill.color}`}
+                >
+                  {pill.label}
+                </motion.span>
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>
