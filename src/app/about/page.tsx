@@ -12,7 +12,7 @@ export default function AboutPage() {
     <>
       <Header />
 
-      <section className="mx-auto flex max-w-[700px] flex-col items-center gap-8 px-6 pb-24 pt-20">
+      <section className="mx-auto flex max-w-[525px] flex-col items-center gap-8 px-6 pb-24 pt-20">
         <div className="space-y-6 text-base leading-relaxed text-zinc-600">
           <Reveal delay={0.05}>
             <p>
