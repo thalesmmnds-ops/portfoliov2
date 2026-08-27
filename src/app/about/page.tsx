@@ -16,7 +16,7 @@ export default function AboutPage() {
         <div className="space-y-6 text-base leading-relaxed text-zinc-600">
           <Reveal delay={0.05}>
             <p>
-              I am a Product Designer based in Calgary (Permanent Resident) with{" "}
+              I am a Product Designer based in Calgary with{" "}
               <strong className="font-semibold text-neutral-800">5+ years of experience</strong>{" "}
               crafting user-centric digital products.
             </p>
