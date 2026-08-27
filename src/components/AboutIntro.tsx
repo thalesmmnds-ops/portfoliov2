@@ -41,7 +41,7 @@ export default function AboutIntro() {
 
         <Reveal delay={0.1}>
           <p>
-            Originally started as an Industrial Designer in Brazil, I bring a unique{" "}
+            I originally started as an Industrial Designer in Brazil and I bring a unique{" "}
             <strong className="font-semibold text-neutral-800">&ldquo;builder&rsquo;s mindset&rdquo;</strong>{" "}
             to UX, focusing on functionality, feasibility. I have a proven track record of
             working end-to-end with Product Managers and Engineers to translate complex
