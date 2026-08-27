@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Reveal from "@/components/Reveal";
@@ -14,19 +13,6 @@ export default function AboutPage() {
       <Header />
 
       <section className="mx-auto flex max-w-[700px] flex-col items-center gap-8 px-6 pb-24 pt-20">
-        <Reveal>
-          <div className="relative h-[200px] w-[214px] overflow-hidden rounded-2xl bg-zinc-100">
-            <Image
-              src="/bring/boss-thales.webp"
-              alt="Thales Mendes de Medeiros"
-              fill
-              className="object-cover object-top"
-              sizes="214px"
-              priority
-            />
-          </div>
-        </Reveal>
-
         <div className="space-y-6 text-base leading-relaxed text-zinc-600">
           <Reveal delay={0.05}>
             <p>
