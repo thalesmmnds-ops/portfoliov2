@@ -19,8 +19,8 @@ export default function FolderCard({
 
       <ImagesBadge
         images={previewImages}
-        folderSize={{ width: 96, height: 72 }}
-        teaserImageSize={{ width: 56, height: 40 }}
+        folderSize={{ width: 144, height: 108 }}
+        teaserImageSize={{ width: 84, height: 60 }}
         hoverImageSize={{ width: 180, height: 130 }}
         hoverTranslateY={-95}
         hoverSpread={58}

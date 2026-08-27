@@ -8,8 +8,10 @@ import { projects } from "@/lib/projects";
 export default function Home() {
   return (
     <>
-      <Header />
-      <Hero />
+      <div className="flex min-h-dvh flex-col">
+        <Header />
+        <Hero />
+      </div>
       <FeaturedProjects projects={projects} />
       <WhatIBring />
       <Footer />

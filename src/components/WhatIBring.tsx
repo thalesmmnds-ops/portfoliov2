@@ -1,33 +1,41 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "framer-motion";
 import Reveal from "./Reveal";
-import { TableIcon } from "./icons";
+import { StickerPeel } from "./ui/StickerPeel";
 
 type Pill = {
   label: string;
   top: string;
   left: string;
   rotate: number;
-  color: string;
+  // Real sticker photo (from /public/bring). `ratio` is the cropped image's
+  // width/height, used to size each sticker proportionally at a shared
+  // display height.
+  image: { src: string; ratio: number };
 };
 
+// Real sticker photos (see /public/bring, cropped from BringImages/) — one
+// per topic we have a sticker for. Positions sit on an 8-point ring around
+// the centered heading/photo (evenly spaced at 45°, offset so none land
+// directly above/below/beside center) rather than two straight flanks, so
+// the topics form a circle around the text like the reference layout.
 const pills: Pill[] = [
-  { label: "Product Design", top: "6%", left: "42%", rotate: -3, color: "bg-blue-100 text-blue-900" },
-  { label: "User Experience Design", top: "16%", left: "68%", rotate: 2, color: "bg-sky-100 text-sky-900" },
-  { label: "Design Systems", top: "18%", left: "12%", rotate: -2, color: "bg-indigo-100 text-indigo-900" },
-  { label: "User Research", top: "44%", left: "2%", rotate: 3, color: "bg-cyan-100 text-cyan-900" },
-  { label: "User Interface Design", top: "48%", left: "78%", rotate: -2, color: "bg-blue-100 text-blue-900" },
-  { label: "Pitch Deck Design", top: "72%", left: "10%", rotate: 2, color: "bg-purple-100 text-purple-900" },
-  { label: "Branding", top: "78%", left: "80%", rotate: -3, color: "bg-pink-100 text-pink-900" },
-  { label: "Visual Design", top: "92%", left: "58%", rotate: 2, color: "bg-rose-100 text-rose-900" },
-  { label: "Framer Development", top: "92%", left: "26%", rotate: -2, color: "bg-violet-100 text-violet-900" },
+  { label: "UI Design", top: "11%", left: "34.5%", rotate: -4, image: { src: "/bring/ui-design.webp", ratio: 1039 / 630 } },
+  { label: "User Research", top: "11%", left: "65.5%", rotate: 3, image: { src: "/bring/user-research.webp", ratio: 1012 / 615 } },
+  { label: "Usability Testing", top: "34%", left: "87%", rotate: -2, image: { src: "/bring/usability-testing.webp", ratio: 1068 / 626 } },
+  { label: "Wireframing", top: "66%", left: "87%", rotate: 3, image: { src: "/bring/wireframing.webp", ratio: 1068 / 625 } },
+  { label: "Design Systems", top: "89%", left: "65.5%", rotate: -3, image: { src: "/bring/design-systems.webp", ratio: 1068 / 625 } },
+  { label: "User Flows", top: "89%", left: "34.5%", rotate: 2, image: { src: "/bring/user-flows.webp", ratio: 1079 / 527 } },
+  { label: "Prototyping", top: "66%", left: "13%", rotate: -3, image: { src: "/bring/prototyping.webp", ratio: 1079 / 527 } },
+  { label: "Visual Design", top: "34%", left: "13%", rotate: -2, image: { src: "/bring/visual-design.webp", ratio: 1079 / 527 } },
 ];
 
 // Approximate size of the scatter container, used to translate each pill's
 // resting position into a "distance from center" offset for the entrance.
 const FIELD_W = 700;
-const FIELD_H = 480;
+const FIELD_H = 640;
 
 function centerOffset(pill: Pill) {
   const leftPct = parseFloat(pill.left);
@@ -38,16 +46,35 @@ function centerOffset(pill: Pill) {
   };
 }
 
+const DESKTOP_IMG_H = 61; // 72 * 0.85
+const MOBILE_IMG_H = 44; // 52 * 0.85
+
+function StickerImage({ pill, height }: { pill: Pill; height: number }) {
+  return (
+    <div style={{ width: height * pill.image.ratio, height }} className="relative select-none">
+      <Image
+        src={pill.image.src}
+        alt={pill.label}
+        fill
+        className="object-contain drop-shadow-md"
+        sizes={`${Math.round(height * pill.image.ratio)}px`}
+      />
+    </div>
+  );
+}
+
 export default function WhatIBring() {
   return (
-    <section className="bg-white px-6 py-28">
-      <div className="relative mx-auto min-h-[560px] max-w-4xl md:min-h-[520px]">
+    <section className="bg-white px-6 pt-[100px] pb-[100px]">
+      <div className="relative mx-auto min-h-[720px] max-w-4xl md:min-h-[680px]">
         <div className="relative z-10 flex flex-col items-center gap-3 pt-10 text-center md:absolute md:inset-0 md:justify-center md:pt-0">
           <Reveal>
-            <TableIcon className="h-8 w-11 text-blue-950" />
+            <div className="relative h-[164px] w-[176px]">
+              <Image src="/bring/boss-thales.webp" alt="Thales" fill className="object-contain" sizes="176px" />
+            </div>
           </Reveal>
           <Reveal delay={0.1}>
-            <h2 className="font-mono text-3xl text-blue-950 md:text-4xl">
+            <h2 className="font-mono text-[32px] font-semibold text-zinc-950">
               What I bring
               <br />
               to the table
@@ -55,14 +82,9 @@ export default function WhatIBring() {
           </Reveal>
         </div>
 
-        <div className="mt-10 flex flex-wrap justify-center gap-3 md:hidden">
+        <div className="mt-10 flex flex-wrap items-center justify-center gap-3 md:hidden">
           {pills.map((pill) => (
-            <span
-              key={pill.label}
-              className={`rounded-full px-4 py-1.5 font-sans text-xs font-medium ${pill.color}`}
-            >
-              {pill.label}
-            </span>
+            <StickerImage key={pill.label} pill={pill} height={MOBILE_IMG_H} />
           ))}
         </div>
 
@@ -81,9 +103,11 @@ export default function WhatIBring() {
                   viewport={{ once: true, margin: "-80px" }}
                   whileHover={{ scale: 1.08, rotate: 0 }}
                   transition={{ duration: 0.7, delay: i * 0.06, ease: [0.22, 1, 0.36, 1] }}
-                  className={`inline-block whitespace-nowrap rounded-full px-4 py-2 font-sans text-sm font-medium shadow-sm ${pill.color}`}
+                  className="inline-block"
                 >
-                  {pill.label}
+                  <StickerPeel peelBackHoverPct={18} peelBackActivePct={26} shadowIntensity={0.5} lightingIntensity={0.15}>
+                    <StickerImage pill={pill} height={DESKTOP_IMG_H} />
+                  </StickerPeel>
                 </motion.span>
               </div>
             );

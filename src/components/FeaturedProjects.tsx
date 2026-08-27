@@ -5,7 +5,7 @@ import type { Project } from "@/lib/projects";
 
 export default function FeaturedProjects({ projects }: { projects: Project[] }) {
   return (
-    <section id="work" className="mx-auto max-w-5xl px-6 pb-28">
+    <section id="work" className="mx-auto w-full max-w-5xl px-6 pb-[100px] pt-[140px]">
       <Reveal>
         <h2 className="font-mono text-[32px] font-semibold text-zinc-900">
           Featured Projects
