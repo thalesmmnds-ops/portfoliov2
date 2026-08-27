@@ -73,6 +73,9 @@ export default function WhatIBring() {
               <Image src="/bring/boss-thales.webp" alt="Thales" fill className="object-contain" sizes="176px" />
             </div>
           </Reveal>
+          <Reveal delay={0.05}>
+            <p className="text-[12px] text-zinc-400">Poorly made with AI.</p>
+          </Reveal>
           <Reveal delay={0.1}>
             <h2 className="font-mono text-[32px] font-semibold text-zinc-950">
               What I bring
