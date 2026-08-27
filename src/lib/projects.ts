@@ -26,7 +26,11 @@ export const projects: Project[] = [
     tagline: "A visual identity refresh with a system to back it up",
     year: "2026",
     live: false,
-    previewImages: [],
+    previewImages: [
+      "/work/the-new-face-of-onze/wireframe-annotations.png",
+      "/work/the-new-face-of-onze/wireframe-sketches.png",
+      "/work/the-new-face-of-onze/before-after-home.jpg",
+    ],
   },
   {
     slug: "managing-fleets-with-ease",
@@ -34,7 +38,10 @@ export const projects: Project[] = [
     tagline: "Simplifying a complex fleet operations dashboard",
     year: "2026",
     live: false,
-    previewImages: [],
+    previewImages: [
+      "/work/managing-fleets-with-ease/driver-app.png",
+      "/work/managing-fleets-with-ease/dashboard-mockup.jpg",
+    ],
   },
 ];
 

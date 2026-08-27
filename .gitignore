@@ -39,6 +39,9 @@ yarn-error.log*
 # raw design exports (already copied into public/ where used)
 /CaseImages1
 /HeroImages
+/BringImages
+/CaseImages2
+/CaseImages3
 
 # typescript
 *.tsbuildinfo
