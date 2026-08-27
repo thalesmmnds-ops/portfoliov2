@@ -42,6 +42,7 @@ yarn-error.log*
 /BringImages
 /CaseImages2
 /CaseImages3
+/Resume
 
 # typescript
 *.tsbuildinfo
