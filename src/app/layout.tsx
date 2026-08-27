@@ -32,7 +32,7 @@ const rubik = Rubik({
 });
 
 export const metadata: Metadata = {
-  title: "Your Name — Product Designer Portfolio",
+  title: "Thales - Portfolio",
   description: "Bridging user needs & business goals.",
 };
 
