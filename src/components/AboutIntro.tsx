@@ -27,7 +27,7 @@ export default function AboutIntro() {
   const [textEl, setTextEl] = useState<HTMLDivElement | null>(null);
 
   return (
-    <section className="relative mx-auto flex max-w-[525px] flex-col items-center gap-8 px-6 pb-[144px] pt-[120px]">
+    <section className="relative mx-auto flex max-w-[473px] flex-col items-center gap-8 px-6 pb-[144px] pt-[120px]">
       <FallingDecor items={aboutItems} avoidEl={textEl} />
 
       <div ref={setTextEl} className="relative z-10 space-y-6 text-base leading-relaxed text-zinc-600">
