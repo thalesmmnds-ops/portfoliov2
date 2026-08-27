@@ -1,11 +1,10 @@
 "use client";
 
 import { useLayoutEffect, useRef, useState } from "react";
-import Image from "next/image";
 import { motion } from "framer-motion";
 import { useMousePositionRef } from "@/hooks/use-mouse-position-ref";
 
-type Item = {
+export type FallingDecorItem = {
   key: string;
   width: number;
   height: number;
@@ -13,108 +12,6 @@ type Item = {
   depth: number;
   node: React.ReactNode;
 };
-
-const items: Item[] = [
-  {
-    key: "calgary-tower",
-    width: 327,
-    height: 447,
-    depth: 1.5,
-    node: (
-      <div className="relative h-full w-full drop-shadow-md">
-        <Image src="/hero/calgary-tower.jpg" alt="" fill className="object-contain" sizes="327px" />
-      </div>
-    ),
-  },
-  {
-    key: "figma-logo",
-    width: 93,
-    height: 141,
-    depth: 1,
-    node: (
-      <div className="relative h-full w-full drop-shadow-md">
-        <Image src="/hero/figma-logo.webp" alt="" fill className="object-contain" sizes="93px" />
-      </div>
-    ),
-  },
-  {
-    key: "macbook",
-    width: 362,
-    height: 304,
-    depth: 2,
-    node: (
-      <div className="relative h-full w-full drop-shadow-md">
-        <Image src="/hero/macbook.png" alt="" fill className="object-contain" sizes="362px" />
-      </div>
-    ),
-  },
-  {
-    key: "coffee",
-    width: 338,
-    height: 338,
-    depth: 2.5,
-    node: (
-      <div className="relative h-full w-full drop-shadow-md">
-        <Image src="/hero/coffee.png" alt="" fill className="object-contain" sizes="338px" />
-      </div>
-    ),
-  },
-  {
-    key: "open-to-work",
-    width: 259,
-    height: 259,
-    depth: 1.8,
-    node: (
-      <div className="relative h-full w-full drop-shadow-md">
-        <Image src="/hero/open-to-work.png" alt="" fill className="object-contain" sizes="259px" />
-      </div>
-    ),
-  },
-  {
-    key: "controller",
-    width: 316,
-    height: 178,
-    depth: 2.2,
-    node: (
-      <div className="relative h-full w-full drop-shadow-md">
-        <Image src="/hero/controller.png" alt="" fill className="object-contain" sizes="316px" />
-      </div>
-    ),
-  },
-  {
-    key: "dinosaur",
-    width: 498,
-    height: 331,
-    depth: 1.3,
-    node: (
-      <div className="relative h-full w-full drop-shadow-md">
-        <Image src="/hero/dinosaur.png" alt="" fill className="object-contain" sizes="498px" />
-      </div>
-    ),
-  },
-  {
-    key: "banff-postcard",
-    width: 352,
-    height: 515,
-    depth: 1.6,
-    node: (
-      <div className="relative h-full w-full drop-shadow-md">
-        <Image src="/hero/banff-postcard.png" alt="" fill className="object-contain" sizes="352px" />
-      </div>
-    ),
-  },
-  {
-    key: "florianopolis-postcard",
-    width: 394,
-    height: 394,
-    depth: 2.1,
-    node: (
-      <div className="relative h-full w-full drop-shadow-md">
-        <Image src="/hero/florianopolis-postcard.png" alt="" fill className="object-contain" sizes="394px" />
-      </div>
-    ),
-  },
-];
 
 const PARALLAX_SENSITIVITY = 1;
 const PARALLAX_EASING = 0.06;
@@ -137,8 +34,10 @@ function overlaps(a: Rect, b: Rect, gap: number) {
 }
 
 export default function FallingDecor({
+  items,
   avoidEl,
 }: {
+  items: FallingDecorItem[];
   avoidEl: HTMLDivElement | null;
 }) {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -159,7 +58,7 @@ export default function FallingDecor({
   // its reserved region and items shrink to fit around it instead.
   useLayoutEffect(() => {
     const container = containerRef.current;
-    if (!container || !avoidEl) return;
+    if (!container || !avoidEl || items.length === 0) return;
 
     const computeLayout = () => {
       const containerRect = container.getBoundingClientRect();
@@ -292,7 +191,7 @@ export default function FallingDecor({
       clearTimeout(resizeTimer);
       window.removeEventListener("resize", handleResize);
     };
-  }, [avoidEl]);
+  }, [avoidEl, items]);
 
   // Subtle eased mouse-parallax layered on top of each item's fixed spot.
   useLayoutEffect(() => {
@@ -322,7 +221,7 @@ export default function FallingDecor({
     sync();
 
     return () => cancelAnimationFrame(frame);
-  }, [layout, mousePositionRef]);
+  }, [layout, mousePositionRef, items]);
 
   return (
     <div
