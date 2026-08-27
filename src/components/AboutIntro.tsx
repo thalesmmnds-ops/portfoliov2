@@ -1,27 +1,82 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import FallingDecor, { type FallingDecorItem } from "./FallingDecor";
 import Reveal from "./Reveal";
 
-// Same falling/parallax effect as the Hero (see FallingDecor.tsx), just
-// without photos yet. Populate this the same way Hero.tsx's heroItems is
-// built — each entry needs a unique key, its natural width/height, a depth
-// (parallax strength — roughly 1 to 2.5 reads well), and the image node
-// itself, e.g.:
-//
-// {
-//   key: "some-photo",
-//   width: 320,
-//   height: 400,
-//   depth: 1.5,
-//   node: (
-//     <div className="relative h-full w-full drop-shadow-md">
-//       <Image src="/about/some-photo.png" alt="" fill className="object-contain" sizes="320px" />
-//     </div>
-//   ),
-// },
-const aboutItems: FallingDecorItem[] = [];
+// Same falling/parallax effect as the Hero (see FallingDecor.tsx), now with
+// real photos (see /public/about, from AboutImages/). Unlike Hero's cutout
+// PNGs, these are plain rectangular photos, so each gets a small white
+// "photo card" border/shadow instead of a drop-shadow on bare artwork.
+const aboutItems: FallingDecorItem[] = [
+  {
+    key: "stampede",
+    width: 170,
+    height: 227,
+    depth: 1.3,
+    node: (
+      <div className="relative h-full w-full overflow-hidden rounded-lg border-4 border-white bg-white shadow-lg">
+        <Image src="/about/stampede.webp" alt="" fill className="object-cover" sizes="170px" />
+      </div>
+    ),
+  },
+  {
+    key: "banff-lake",
+    width: 140,
+    height: 187,
+    depth: 1.9,
+    node: (
+      <div className="relative h-full w-full overflow-hidden rounded-lg border-4 border-white bg-white shadow-lg">
+        <Image src="/about/banff-lake.webp" alt="" fill className="object-cover" sizes="140px" />
+      </div>
+    ),
+  },
+  {
+    key: "dino-museum",
+    width: 150,
+    height: 200,
+    depth: 1.5,
+    node: (
+      <div className="relative h-full w-full overflow-hidden rounded-lg border-4 border-white bg-white shadow-lg">
+        <Image src="/about/dino-museum.webp" alt="" fill className="object-cover" sizes="150px" />
+      </div>
+    ),
+  },
+  {
+    key: "autumn-hike",
+    width: 130,
+    height: 173,
+    depth: 2.2,
+    node: (
+      <div className="relative h-full w-full overflow-hidden rounded-lg border-4 border-white bg-white shadow-lg">
+        <Image src="/about/autumn-hike.webp" alt="" fill className="object-cover" sizes="130px" />
+      </div>
+    ),
+  },
+  {
+    key: "sunset-park",
+    width: 155,
+    height: 207,
+    depth: 1.6,
+    node: (
+      <div className="relative h-full w-full overflow-hidden rounded-lg border-4 border-white bg-white shadow-lg">
+        <Image src="/about/sunset-park.webp" alt="" fill className="object-cover" sizes="155px" />
+      </div>
+    ),
+  },
+  {
+    key: "northern-lights",
+    width: 145,
+    height: 193,
+    depth: 2,
+    node: (
+      <div className="relative h-full w-full overflow-hidden rounded-lg border-4 border-white bg-white shadow-lg">
+        <Image src="/about/northern-lights.webp" alt="" fill className="object-cover" sizes="145px" />
+      </div>
+    ),
+  },
+];
 
 export default function AboutIntro() {
   const [textEl, setTextEl] = useState<HTMLDivElement | null>(null);

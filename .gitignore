@@ -43,6 +43,7 @@ yarn-error.log*
 /CaseImages2
 /CaseImages3
 /Resume
+/AboutImages
 
 # typescript
 *.tsbuildinfo
