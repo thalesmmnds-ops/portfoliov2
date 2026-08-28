@@ -24,12 +24,19 @@ export const useMousePositionRef = (
     };
 
     const handleTouchMove = (ev: TouchEvent) => {
+      // `touches` can be empty mid-gesture (e.g. a fast swipe crossing a
+      // multi-touch transition) — reading touches[0].clientX unguarded
+      // threw here, and since this listener isn't passive, the browser has
+      // to wait on it before committing the scroll frame. On some devices
+      // an uncaught throw here was enough to stall that in-flight scroll
+      // gesture, which read as "scrolling sometimes doesn't work."
       const touch = ev.touches[0];
+      if (!touch) return;
       updatePosition(touch.clientX, touch.clientY);
     };
 
-    window.addEventListener("mousemove", handleMouseMove);
-    window.addEventListener("touchmove", handleTouchMove);
+    window.addEventListener("mousemove", handleMouseMove, { passive: true });
+    window.addEventListener("touchmove", handleTouchMove, { passive: true });
 
     return () => {
       window.removeEventListener("mousemove", handleMouseMove);

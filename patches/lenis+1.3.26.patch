@@ -1,0 +1,44 @@
+diff --git a/node_modules/lenis/dist/lenis.js b/node_modules/lenis/dist/lenis.js
+index 661ec30..ddae6b2 100644
+--- a/node_modules/lenis/dist/lenis.js
++++ b/node_modules/lenis/dist/lenis.js
+@@ -318,7 +318,7 @@
+ 		* @param event Touch event
+ 		*/
+ 		onTouchStart = (event) => {
+-			const { clientX, clientY } = event.targetTouches ? event.targetTouches[0] : event;
++			const { clientX, clientY } = event.targetTouches && event.targetTouches.length > 0 ? event.targetTouches[0] : event;
+ 			this.touchStart.x = clientX;
+ 			this.touchStart.y = clientY;
+ 			this.lastDelta = {
+@@ -333,7 +333,7 @@
+ 		};
+ 		/** Event handler for 'touchmove' event */
+ 		onTouchMove = (event) => {
+-			const { clientX, clientY } = event.targetTouches ? event.targetTouches[0] : event;
++			const { clientX, clientY } = event.targetTouches && event.targetTouches.length > 0 ? event.targetTouches[0] : event;
+ 			const deltaX = -(clientX - this.touchStart.x) * this.options.touchMultiplier;
+ 			const deltaY = -(clientY - this.touchStart.y) * this.options.touchMultiplier;
+ 			this.touchStart.x = clientX;
+diff --git a/node_modules/lenis/dist/lenis.mjs b/node_modules/lenis/dist/lenis.mjs
+index c36651d..01722fe 100644
+--- a/node_modules/lenis/dist/lenis.mjs
++++ b/node_modules/lenis/dist/lenis.mjs
+@@ -309,7 +309,7 @@ var VirtualScroll = class {
+ 	* @param event Touch event
+ 	*/
+ 	onTouchStart = (event) => {
+-		const { clientX, clientY } = event.targetTouches ? event.targetTouches[0] : event;
++		const { clientX, clientY } = event.targetTouches && event.targetTouches.length > 0 ? event.targetTouches[0] : event;
+ 		this.touchStart.x = clientX;
+ 		this.touchStart.y = clientY;
+ 		this.lastDelta = {
+@@ -324,7 +324,7 @@ var VirtualScroll = class {
+ 	};
+ 	/** Event handler for 'touchmove' event */
+ 	onTouchMove = (event) => {
+-		const { clientX, clientY } = event.targetTouches ? event.targetTouches[0] : event;
++		const { clientX, clientY } = event.targetTouches && event.targetTouches.length > 0 ? event.targetTouches[0] : event;
+ 		const deltaX = -(clientX - this.touchStart.x) * this.options.touchMultiplier;
+ 		const deltaY = -(clientY - this.touchStart.y) * this.options.touchMultiplier;
+ 		this.touchStart.x = clientX;
