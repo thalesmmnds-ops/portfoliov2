@@ -12,67 +12,78 @@ import Reveal from "./Reveal";
 const aboutItems: FallingDecorItem[] = [
   {
     key: "stampede",
-    width: 170,
-    height: 227,
+    width: 190,
+    height: 253,
     depth: 1.3,
     node: (
       <div className="relative h-full w-full overflow-hidden rounded-lg border-4 border-white bg-white shadow-lg">
-        <Image src="/about/stampede.webp" alt="" fill className="object-cover" sizes="170px" />
+        <Image src="/about/stampede.webp" alt="" fill className="object-cover" sizes="190px" />
       </div>
     ),
   },
   {
     key: "banff-lake",
-    width: 140,
-    height: 187,
+    width: 157,
+    height: 209,
     depth: 1.9,
     node: (
       <div className="relative h-full w-full overflow-hidden rounded-lg border-4 border-white bg-white shadow-lg">
-        <Image src="/about/banff-lake.webp" alt="" fill className="object-cover" sizes="140px" />
+        <Image src="/about/banff-lake.webp" alt="" fill className="object-cover" sizes="157px" />
       </div>
     ),
   },
   {
     key: "dino-museum",
-    width: 150,
-    height: 200,
+    width: 168,
+    height: 224,
     depth: 1.5,
     node: (
       <div className="relative h-full w-full overflow-hidden rounded-lg border-4 border-white bg-white shadow-lg">
-        <Image src="/about/dino-museum.webp" alt="" fill className="object-cover" sizes="150px" />
+        <Image src="/about/dino-museum.webp" alt="" fill className="object-cover" sizes="168px" />
       </div>
     ),
   },
   {
     key: "autumn-hike",
-    width: 130,
-    height: 173,
+    width: 146,
+    height: 194,
     depth: 2.2,
     node: (
       <div className="relative h-full w-full overflow-hidden rounded-lg border-4 border-white bg-white shadow-lg">
-        <Image src="/about/autumn-hike.webp" alt="" fill className="object-cover" sizes="130px" />
+        <Image src="/about/autumn-hike.webp" alt="" fill className="object-cover" sizes="146px" />
       </div>
     ),
   },
   {
     key: "sunset-park",
-    width: 155,
-    height: 207,
+    width: 174,
+    height: 232,
     depth: 1.6,
     node: (
       <div className="relative h-full w-full overflow-hidden rounded-lg border-4 border-white bg-white shadow-lg">
-        <Image src="/about/sunset-park.webp" alt="" fill className="object-cover" sizes="155px" />
+        <Image src="/about/sunset-park.webp" alt="" fill className="object-cover" sizes="174px" />
       </div>
     ),
   },
   {
     key: "northern-lights",
-    width: 145,
-    height: 193,
+    width: 163,
+    height: 217,
     depth: 2,
     node: (
       <div className="relative h-full w-full overflow-hidden rounded-lg border-4 border-white bg-white shadow-lg">
-        <Image src="/about/northern-lights.webp" alt="" fill className="object-cover" sizes="145px" />
+        <Image src="/about/northern-lights.webp" alt="" fill className="object-cover" sizes="163px" />
+      </div>
+    ),
+  },
+  {
+    key: "stadium",
+    width: 151,
+    height: 201,
+    depth: 1.7,
+    node: (
+      <div className="relative h-full w-full overflow-hidden rounded-lg border-4 border-white bg-white shadow-lg">
+        <Image src="/about/stadium.webp" alt="" fill className="object-cover" sizes="151px" />
       </div>
     ),
   },
@@ -82,7 +93,7 @@ export default function AboutIntro() {
   const [textEl, setTextEl] = useState<HTMLDivElement | null>(null);
 
   return (
-    <section className="relative mx-auto flex max-w-[473px] flex-col items-center gap-8 px-6 pb-[144px] pt-[120px]">
+    <section className="relative mx-auto flex max-w-[473px] flex-col items-center gap-8 px-6 pb-[260px] pt-[220px] md:pb-[144px] md:pt-[120px]">
       <FallingDecor items={aboutItems} avoidEl={textEl} />
 
       <div ref={setTextEl} className="relative z-10 space-y-6 text-base leading-relaxed text-zinc-600">
